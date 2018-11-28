@@ -1,0 +1,88 @@
+1、安装MinGW（mingw-get-setup.exe）
+2、安装“MinGW Installation Manager”管理安装包
+3、"Basic Setup"里安装mingw32-base、mingw32-gcc-g++、msys-base
+4、“All Packages”里选择“MSYS”-》“MinGW Developer Toolkit”，选择“msys-perl”,然后应用。
+5、添加“C:\MinGW\bin”到环境变量
+6、安装Git（git-scm.com）
+7、mkdir bc
+   cd bc
+   git clone https://github.com/bitcoin/bitcoin.git
+   git checkout 4405b78d6059e536c36974088a8ed4d9f0f29898
+8、下载wxWidgets-2.8.12,解压到bc/wxWidgets-2.8.12 （https://www.wxwidgets.org/downloads/）
+9、打开C:\MinGW\msys\1.0\msys.bat
+   cd bc/wxWidgets-2.8.12
+   ./configure --with-msw --enable-debug --enable-debug_gdb --disable-shared
+   make
+10、下载openssl-1.0.2d (https://ftp.openssl.org/source/old/1.0.2/)
+   cd bc/openssl-1.0.2d
+   ./config
+   make  (失败)
+
+   3、http://openssl.6102.n7.nabble.com/openssl-org-1511-A-possible-bug-when-compiling-openSSL-with-minGW-td34024.html
+   4、http://blog.csdn.net/u012997311/article/details/51423137
+   5、http://blog.csdn.net/zhuzhenyang110/article/details/42046261
+   6、http://blog.csdn.net/e_wsq/article/details/8903275
+   7、http://blog.csdn.net/feiyunw/article/details/5597546
+   make depend 会改变Makefile
+   
+   http://blog.csdn.net/ubuntu64fan/article/details/49865237
+   
+   http://blog.csdn.net/sanwu2010/article/details/26163625(windows下mingw的复制粘贴)
+   
+11、下载db-4.8.30.NC  (https://oss.oracle.com/pipermail/bdb/2010-May/000030.html   http://download.oracle.com/berkeley-db/db-4.8.30.NC.zip)
+   cd bc/db-4.8.30.NC/build_unix
+   ../dist/configure --enable-mingw --enable-cxx
+   make
+12、下载boost_1_35_0,解压到bc/boost_1_35_0
+13、转到bc/bitcoin目录，修改makefile
+14、make
+修改net.h(https://stackoverflow.com/questions/30132298/reference-to-array-is-ambiguous-error-when-using-memset-function)
+extern std::array<bool, 10> vfThreadRunning;
+
+创建obj目录（https://stackoverflow.com/questions/30657242/makefile-fatal-error-cant-create-obj-calc-o）
+
+修改net.cpp
+std::array<bool, 10> vfThreadRunning;
+
+ui.cpp
+注释掉wtx.vOrderForm.push_back(make_pair(m_staticTextLabel[i]->GetLabel(), strValue));
+
+A Dissection of Bitcoin
+作者：Paul Huang
+https://books.google.com/books?id=I3B4CwAAQBAJ&pg=PP8&lpg=PP8&dq=BitCoin+v0.1.5+ALPHA&source=bl&ots=G4O-KQKdaC&sig=iF9wcY3GiKeD3-xk4SX3CITzSnw&hl=zh-CN&sa=X&ved=0ahUKEwiKxpf_vOnZAhWn5oMKHTOfB8EQ6AEIajAH#v=onepage&q=BitCoin%20v0.1.5%20ALPHA&f=false
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
